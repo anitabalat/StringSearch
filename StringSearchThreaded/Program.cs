@@ -1,17 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 
 namespace StringSearchThreaded
 {
     public class Program
     {
         public int totalMatches = 0;
+        private readonly object matchesLock = new object();
+        private readonly object comparesLock = new object();
 
         public void Main(string[] args)
         {
             int lineNumber = 1;
-            int totalCompares = 0;
+            int totalCompares = 0;        
             int SEARCH_OPTION = Convert.ToInt16(args[2]);
+            int THREADS = 2;
             Random random = new Random();
 
             if (!(File.Exists(args[0]) && File.Exists(args[1])))
@@ -24,51 +29,81 @@ namespace StringSearchThreaded
             string[] search = File.ReadAllLines(args[1]);
             string searchString = search[0];
 
-            for (int i = 0; i < lines.Length; i++, lineNumber++)
+            Thread[] threads = new Thread[THREADS];
+            //List<Thread> threads2 = new List<Thread>();
+
+
+            for (int i = 0; i < THREADS; i++)
             {
-                string line = lines[i];
-                stringSearch(line, searchString, lineNumber, SEARCH_OPTION, ref totalMatches, ref totalCompares);
+                threads[i] = new Thread(() => stringSearch(lines, searchString, lineNumber, SEARCH_OPTION, ref totalMatches, ref totalCompares, THREADS));
+                string name = i.ToString();
+                threads[i].Name = name;
+                threads[i].Start();
+                //Console.WriteLine("I am thread {0}", thread.Name);
             }
 
-            Console.WriteLine("In C# StringSearchSequential: (1 THREAD)");
+            for(int i = 0; i < THREADS; i++)
+            {
+                threads[i].Join();
+            }
+            
+
+
+
+            Console.WriteLine("In C# StringSearchSequential: ({0} THREADS)", THREADS);
             Console.WriteLine("Total Compares:{0}", totalCompares);
             Console.WriteLine("Total Matches: {0}", totalMatches);
         }
 
-        void stringSearch(string line, string searchString, int lineNumber, int SEARCH_OPTION, ref int totalMatches, ref int totalCompares)
+        void stringSearch(string[] lines, string searchString, int lineNumber, int SEARCH_OPTION, ref int totalMatches, ref int totalCompares, int threads)
         {
-            int i, j, k;
-            int match = 0;                                               // keeps track of match returned by charcmp
-            int matchFound = 0;                                          // keeps track of whether a complete match has been found
-            int startPoint = 0;                                          // holds starting point of where a match was found
-            int lineLength = line.Length;
-            int searchStringLength = searchString.Length;
+            int ID = Int32.Parse(Thread.CurrentThread.Name);
 
-            for (i = 0; i < (lineLength - 1); i++)                        // for each element in the line array
+            for (int line = ID; line < lines.Length; line += threads)
             {
-                for (j = 0, k = i; j < searchStringLength; j++, k++)      // for each element in the search string
-                {                                                         // if there are as many elements left to check in the line array as there are elements in the search string...
-                    if ((i + (searchStringLength - 1)) < (lineLength - 1))
-                    {
-                        match = charcmp(line[k], searchString[j], SEARCH_OPTION);    // check for matching characters
+                lineNumber = line;
+                string oneLine = lines[line];
+                int i, j, k;
+                int match = 0;                                               // keeps track of match returned by charcmp
+                int matchFound = 0;                                          // keeps track of whether a complete match has been found
+                int startPoint = 0;                                          // holds starting point of where a match was found
+                int lineLength = oneLine.Length;
+                int searchStringLength = searchString.Length;
 
-                        if (match == 1)
+                for (i = 0; i < (lineLength - 1); i++)                        // for each element in the line array
+                {
+                    for (j = 0, k = i; j < searchStringLength; j++, k++)      // for each element in the search string
+                    {                                                         // if there are as many elements left to check in the line array as there are elements in the search string...
+                        if ((i + (searchStringLength - 1)) < (lineLength - 1))
                         {
-                            matchFound++;                                // if characters matches, keep a tally of number of matched characters
-                        }
+                            match = charcmp(oneLine[k], searchString[j], SEARCH_OPTION);    // check for matching characters
 
-                        if (matchFound == searchStringLength)             // if the number of matched characters is the same as the number of chacters in the search string
-                        {
-                            startPoint = i;
-                            totalMatches += 1;           // update the total number of matches found and print a message saying where the match was found
+                            if (match == 1)
+                            {
+                                matchFound++;                                // if characters matches, keep a tally of number of matched characters
+                            }
 
-                            Console.WriteLine(Environment.NewLine + $"Match Found on Line: {lineNumber} Column: {startPoint}");
+                            if (matchFound == searchStringLength)             // if the number of matched characters is the same as the number of chacters in the search string
+                            {
+                                startPoint = i;
+
+                                lock (matchesLock)
+                                {
+                                    totalMatches += 1;           // update the total number of matches found and print a message saying where the match was found
+                                }
+
+                                Console.WriteLine(Environment.NewLine + $"Match Found on Line: {lineNumber} Column: {startPoint}");
+                            }
                         }
                     }
-                }
 
-                matchFound = 0;                                          // reinitialize matchFound to 0 for next iteration
-                totalCompares += 1;                     // update total number of compares
+                    matchFound = 0;                                          // reinitialize matchFound to 0 for next iteration
+
+                    lock (comparesLock)
+                    {
+                        totalCompares += 1;                     // update total number of compares
+                    }
+                }
             }
         }
         int charcmp(char a, char b, int c)

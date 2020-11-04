@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StringSearchSequential\StringSearchSequential.csproj" />
+    <ProjectReference Include="..\StringSearchThreaded\StringSearchThreaded.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,12 +1,33 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using StringSearchSequential;
-//using StringSearchThreaded;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace StringSearchSequentialTest
 {
     [TestClass]
-    public class UnitTest1
+    public class ThreadedTest
     {
+        [TestMethod]
+        public void ThreadedDevTest()
+        {
+            var lines = "raw";
+            var search = "pat2";
+            var SEARCH_OPTION = "1";
+            var expectedMatches = 3;
+
+            string[] args = { lines, search, SEARCH_OPTION };
+
+            var stringSearchThreaded = new StringSearchThreaded.Program();
+
+            stringSearchThreaded.Main(args);
+
+            var totalMatches = stringSearchThreaded.totalMatches;
+
+            Assert.AreEqual(expectedMatches, totalMatches);
+        }
+
+
         [TestMethod]
         public void Question1Test()
         {
@@ -17,11 +38,11 @@ namespace StringSearchSequentialTest
 
             string[] args = { lines, search, SEARCH_OPTION };
 
-            var stringSearchSequential = new Program();
+            var stringSearchThreaded = new StringSearchThreaded.Program();
 
-            stringSearchSequential.Main(args);
+            stringSearchThreaded.Main(args);
 
-            var totalMatches = stringSearchSequential.totalMatches;
+            var totalMatches = stringSearchThreaded.totalMatches;
 
             Assert.AreEqual(expectedMatches, totalMatches);
         }
@@ -34,11 +55,11 @@ namespace StringSearchSequentialTest
             var SEARCH_OPTION = "1";
             var expectedMatches = 6;
             string[] args = { lines, search, SEARCH_OPTION };
-            var stringSearchSequential = new Program();
+            var stringSearchThreaded = new StringSearchThreaded.Program();
 
-            stringSearchSequential.Main(args);
+            stringSearchThreaded.Main(args);
 
-            var totalMatches = stringSearchSequential.totalMatches;
+            var totalMatches = stringSearchThreaded.totalMatches;
 
             Assert.AreEqual(expectedMatches, totalMatches);
         }
@@ -51,11 +72,11 @@ namespace StringSearchSequentialTest
             var SEARCH_OPTION = "1";
             var expectedMatches = 6;
             string[] args = { lines, search, SEARCH_OPTION };
-            var stringSearchSequential = new Program();
+            var stringSearchThreaded = new StringSearchThreaded.Program();
 
-            stringSearchSequential.Main(args);
+            stringSearchThreaded.Main(args);
 
-            var totalMatches = stringSearchSequential.totalMatches;
+            var totalMatches = stringSearchThreaded.totalMatches;
 
             Assert.AreEqual(expectedMatches, totalMatches);
         }
@@ -68,11 +89,11 @@ namespace StringSearchSequentialTest
             var SEARCH_OPTION = "1";
             var expectedMatches = 271;
             string[] args = { lines, search, SEARCH_OPTION };
-            var stringSearchSequential = new Program();
+            var stringSearchThreaded = new StringSearchThreaded.Program();
 
-            stringSearchSequential.Main(args);
+            stringSearchThreaded.Main(args);
 
-            var totalMatches = stringSearchSequential.totalMatches;
+            var totalMatches = stringSearchThreaded.totalMatches;
 
             Assert.AreEqual(expectedMatches, totalMatches);
         }
@@ -85,11 +106,11 @@ namespace StringSearchSequentialTest
             var SEARCH_OPTION = "2";
             var expectedMatches = 271;
             string[] args = { lines, search, SEARCH_OPTION };
-            var stringSearchSequential = new Program();
+            var stringSearchThreaded = new StringSearchThreaded.Program();
 
-            stringSearchSequential.Main(args);
+            stringSearchThreaded.Main(args);
 
-            var totalMatches = stringSearchSequential.totalMatches;
+            var totalMatches = stringSearchThreaded.totalMatches;
 
             Assert.AreEqual(expectedMatches, totalMatches);
         }
@@ -102,11 +123,11 @@ namespace StringSearchSequentialTest
             var SEARCH_OPTION = "2";
             var expectedMatches = 127;
             string[] args = { lines, search, SEARCH_OPTION };
-            var stringSearchSequential = new Program();
+            var stringSearchThreaded = new StringSearchThreaded.Program();
 
-            stringSearchSequential.Main(args);
+            stringSearchThreaded.Main(args);
 
-            var totalMatches = stringSearchSequential.totalMatches;
+            var totalMatches = stringSearchThreaded.totalMatches;
 
             Assert.AreEqual(expectedMatches, totalMatches);
         }
@@ -119,11 +140,11 @@ namespace StringSearchSequentialTest
             var SEARCH_OPTION = "2";
             var expectedMatches = 217;
             string[] args = { lines, search, SEARCH_OPTION };
-            var stringSearchSequential = new Program();
+            var stringSearchThreaded = new StringSearchThreaded.Program();
 
-            stringSearchSequential.Main(args);
+            stringSearchThreaded.Main(args);
 
-            var totalMatches = stringSearchSequential.totalMatches;
+            var totalMatches = stringSearchThreaded.totalMatches;
 
             Assert.AreEqual(expectedMatches, totalMatches);
         }
@@ -136,11 +157,11 @@ namespace StringSearchSequentialTest
             var SEARCH_OPTION = "3";
             var expectedMatches = 11;
             string[] args = { lines, search, SEARCH_OPTION };
-            var stringSearchSequential = new Program();
+            var stringSearchThreaded = new StringSearchThreaded.Program();
 
-            stringSearchSequential.Main(args);
+            stringSearchThreaded.Main(args);
 
-            var totalMatches = stringSearchSequential.totalMatches;
+            var totalMatches = stringSearchThreaded.totalMatches;
 
             Assert.AreEqual(expectedMatches, totalMatches);
         }
@@ -153,11 +174,11 @@ namespace StringSearchSequentialTest
             var SEARCH_OPTION = "3";
             var expectedMatches = 27;
             string[] args = { lines, search, SEARCH_OPTION };
-            var stringSearchSequential = new Program();
+            var stringSearchThreaded = new StringSearchThreaded.Program();
 
-            stringSearchSequential.Main(args);
+            stringSearchThreaded.Main(args);
 
-            var totalMatches = stringSearchSequential.totalMatches;
+            var totalMatches = stringSearchThreaded.totalMatches;
 
             Assert.AreEqual(expectedMatches, totalMatches);
         }
@@ -170,11 +191,11 @@ namespace StringSearchSequentialTest
             var SEARCH_OPTION = "3";
             var expectedMatches = 2;
             string[] args = { lines, search, SEARCH_OPTION };
-            var stringSearchSequential = new Program();
+            var stringSearchThreaded = new StringSearchThreaded.Program();
 
-            stringSearchSequential.Main(args);
+            stringSearchThreaded.Main(args);
 
-            var totalMatches = stringSearchSequential.totalMatches;
+            var totalMatches = stringSearchThreaded.totalMatches;
 
             Assert.AreEqual(expectedMatches, totalMatches);
         }
