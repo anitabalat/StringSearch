@@ -13,8 +13,6 @@ namespace StringSearchSequential
             int SEARCH_OPTION = 3;
             Random random = new Random();
 
-            int test = 5;
-
             if (!(File.Exists(args[0]) && File.Exists(args[1])))
             {
                 Console.WriteLine("Files do not exist.\n");
