@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 
-namespace StringSearchSequential
-{   
+namespace StringSearchThreaded
+{
     public class Program
     {
         public int totalMatches = 0;
@@ -24,7 +24,7 @@ namespace StringSearchSequential
             string[] search = File.ReadAllLines(args[1]);
             string searchString = search[0];
 
-            for( int i = 0; i < lines.Length; i++, lineNumber++)
+            for (int i = 0; i < lines.Length; i++, lineNumber++)
             {
                 string line = lines[i];
                 stringSearch(line, searchString, lineNumber, SEARCH_OPTION, ref totalMatches, ref totalCompares);
@@ -35,7 +35,7 @@ namespace StringSearchSequential
             Console.WriteLine("Total Matches: {0}", totalMatches);
         }
 
-        void stringSearch(string line, string searchString, int lineNumber, int SEARCH_OPTION, ref int totalMatches, ref int totalCompares )
+        void stringSearch(string line, string searchString, int lineNumber, int SEARCH_OPTION, ref int totalMatches, ref int totalCompares)
         {
             int i, j, k;
             int match = 0;                                               // keeps track of match returned by charcmp

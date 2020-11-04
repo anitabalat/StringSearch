@@ -2,7 +2,7 @@
   "profiles": {
     "StringSearchSequential": {
       "commandName": "Project",
-      "commandLineArgs": "src pat8"
+      "commandLineArgs": "src pat2 1"
     }
   }
 }
