@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "StringSearchSequential": {
+      "commandName": "Project",
+      "commandLineArgs": "src pat8"
+    }
+  }
+}
