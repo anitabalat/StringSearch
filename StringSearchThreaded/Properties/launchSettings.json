@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "StringSearchThreaded": {
-      "commandName": "Project",
-      "commandLineArgs": "raw pat2 1"
-    }
-  }
-}

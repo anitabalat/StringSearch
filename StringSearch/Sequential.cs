@@ -1,41 +1,45 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 
-namespace StringSearchSequential
-{   
-    public class Program
+namespace StringSearch
+{
+    class Sequential
     {
-        public int totalMatches = 0;
-
-        public void Main(string[] args)
+        public int GetTotalMatches(string[] args)
         {
             int lineNumber = 1;
             int totalCompares = 0;
+            int totalMatches = 0;
             int SEARCH_OPTION = Convert.ToInt16(args[2]);
             Random random = new Random();
+            var fileToSearch = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + args[0];
+            var searchPattern = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + args[1];
 
-            if (!(File.Exists(args[0]) && File.Exists(args[1])))
+            if (!(File.Exists(fileToSearch) && File.Exists(searchPattern)))
             {
                 Console.WriteLine("Files do not exist.\n");
-                return;
+                return -1;
             }
 
-            string[] lines = File.ReadAllLines(args[0]);
-            string[] search = File.ReadAllLines(args[1]);
+            string[] lines = File.ReadAllLines(fileToSearch);
+            string[] search = File.ReadAllLines(searchPattern);
             string searchString = search[0];
 
-            for( int i = 0; i < lines.Length; i++, lineNumber++)
+            for (int i = 0; i < lines.Length; i++, lineNumber++)
             {
                 string line = lines[i];
-                stringSearch(line, searchString, lineNumber, SEARCH_OPTION, ref totalMatches, ref totalCompares);
+                StringSearch(line, searchString, lineNumber, SEARCH_OPTION, ref totalMatches, ref totalCompares);
             }
 
             Console.WriteLine("In C# StringSearchSequential: (1 THREAD)");
             Console.WriteLine("Total Compares:{0}", totalCompares);
             Console.WriteLine("Total Matches: {0}", totalMatches);
+
+            return totalMatches;
         }
 
-        void stringSearch(string line, string searchString, int lineNumber, int SEARCH_OPTION, ref int totalMatches, ref int totalCompares )
+        void StringSearch(string line, string searchString, int lineNumber, int SEARCH_OPTION, ref int totalMatches, ref int totalCompares)
         {
             int i, j, k;
             int match = 0;                                               // keeps track of match returned by charcmp
@@ -50,7 +54,7 @@ namespace StringSearchSequential
                 {                                                         // if there are as many elements left to check in the line array as there are elements in the search string...
                     if ((i + (searchStringLength - 1)) < (lineLength - 1))
                     {
-                        match = charcmp(line[k], searchString[j], SEARCH_OPTION);    // check for matching characters
+                        match = CharCmp(line[k], searchString[j], SEARCH_OPTION);    // check for matching characters
 
                         if (match == 1)
                         {
@@ -71,7 +75,8 @@ namespace StringSearchSequential
                 totalCompares += 1;                     // update total number of compares
             }
         }
-        int charcmp(char a, char b, int c)
+
+        int CharCmp(char a, char b, int c)
         {
             //int k, x;
             //x = random.Next(1000000);
@@ -144,6 +149,5 @@ namespace StringSearchSequential
 
             return 0;
         }
-
     }
 }

@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "StringSearchSequential": {
+    "StringSearch": {
       "commandName": "Project",
       "commandLineArgs": "raw pat2 1"
     }

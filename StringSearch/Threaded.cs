@@ -1,54 +1,59 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Threading;
 
-namespace StringSearchThreaded
+namespace StringSearch
 {
-    public class Program
+    public class Threaded
     {
-        public int totalMatches = 0;
         private readonly object matchesLock = new object();
         private readonly object comparesLock = new object();
 
-        public void Main(string[] args)
+        public int GetTotalMatches(string[] args)
         {
             int lineNumber = 1;
-            int totalCompares = 0;        
+            int totalCompares = 0;
+            int totalMatches = 0;
             int SEARCH_OPTION = Convert.ToInt16(args[2]);
             int THREADS = 2;
             Random random = new Random();
+            var fileToSearch = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + args[0];
+            var searchPattern = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + args[1];
 
-            if (!(File.Exists(args[0]) && File.Exists(args[1])))
+            if (!(File.Exists(fileToSearch) && File.Exists(searchPattern)))
             {
                 Console.WriteLine("Files do not exist.\n");
-                return;
+                return -1;
             }
 
-            string[] lines = File.ReadAllLines(args[0]);
-            string[] search = File.ReadAllLines(args[1]);
+            string[] lines = File.ReadAllLines(fileToSearch);
+            string[] search = File.ReadAllLines(searchPattern);
             string searchString = search[0];
 
             Thread[] threads = new Thread[THREADS];
-    
+
             for (int i = 0; i < THREADS; i++)
             {
                 int id = i;
-                threads[i] = new Thread(() => stringSearch(lines, searchString, lineNumber, SEARCH_OPTION, ref totalMatches, ref totalCompares, THREADS, id));
+                threads[i] = new Thread(() => StringSearch(lines, searchString, lineNumber, SEARCH_OPTION, ref totalMatches, ref totalCompares, THREADS, id));
                 threads[i].Start();
             }
 
-            for(int i = 0; i < THREADS; i++)
+            for (int i = 0; i < THREADS; i++)
             {
                 threads[i].Join();
             }
-            
+
             Console.WriteLine("In C# StringSearchSequential: ({0} THREADS)", THREADS);
             Console.WriteLine("Total Compares:{0}", totalCompares);
             Console.WriteLine("Total Matches: {0}", totalMatches);
+
+            return totalMatches;
         }
 
-        void stringSearch(string[] lines, string searchString, int lineNumber, int SEARCH_OPTION, ref int totalMatches, ref int totalCompares, int threads, int ID)
+        void StringSearch(string[] lines, string searchString, int lineNumber, int SEARCH_OPTION, ref int totalMatches, ref int totalCompares, int threads, int ID)
         {
             for (int line = ID; line < lines.Length; line += threads)
             {
@@ -67,7 +72,7 @@ namespace StringSearchThreaded
                     {                                                         // if there are as many elements left to check in the line array as there are elements in the search string...
                         if ((i + (searchStringLength - 1)) < (lineLength - 1))
                         {
-                            match = charcmp(oneLine[k], searchString[j], SEARCH_OPTION);    // check for matching characters
+                            match = CharCmp(oneLine[k], searchString[j], SEARCH_OPTION);    // check for matching characters
 
                             if (match == 1)
                             {
@@ -97,7 +102,8 @@ namespace StringSearchThreaded
                 }
             }
         }
-        int charcmp(char a, char b, int c)
+
+        int CharCmp(char a, char b, int c)
         {
             //int k, x;
             //x = random.Next(1000000);
@@ -170,6 +176,5 @@ namespace StringSearchThreaded
 
             return 0;
         }
-
     }
 }
