@@ -30,16 +30,12 @@ namespace StringSearchThreaded
             string searchString = search[0];
 
             Thread[] threads = new Thread[THREADS];
-            //List<Thread> threads2 = new List<Thread>();
-
-
+    
             for (int i = 0; i < THREADS; i++)
             {
-                threads[i] = new Thread(() => stringSearch(lines, searchString, lineNumber, SEARCH_OPTION, ref totalMatches, ref totalCompares, THREADS));
-                string name = i.ToString();
-                threads[i].Name = name;
+                int id = i;
+                threads[i] = new Thread(() => stringSearch(lines, searchString, lineNumber, SEARCH_OPTION, ref totalMatches, ref totalCompares, THREADS, id));
                 threads[i].Start();
-                //Console.WriteLine("I am thread {0}", thread.Name);
             }
 
             for(int i = 0; i < THREADS; i++)
@@ -47,18 +43,13 @@ namespace StringSearchThreaded
                 threads[i].Join();
             }
             
-
-
-
             Console.WriteLine("In C# StringSearchSequential: ({0} THREADS)", THREADS);
             Console.WriteLine("Total Compares:{0}", totalCompares);
             Console.WriteLine("Total Matches: {0}", totalMatches);
         }
 
-        void stringSearch(string[] lines, string searchString, int lineNumber, int SEARCH_OPTION, ref int totalMatches, ref int totalCompares, int threads)
+        void stringSearch(string[] lines, string searchString, int lineNumber, int SEARCH_OPTION, ref int totalMatches, ref int totalCompares, int threads, int ID)
         {
-            int ID = Int32.Parse(Thread.CurrentThread.Name);
-
             for (int line = ID; line < lines.Length; line += threads)
             {
                 lineNumber = line;
