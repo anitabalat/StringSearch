@@ -35,7 +35,7 @@ namespace StringSearch
                 StringSearch(lines[index], searchString, lineNumber, SEARCH_OPTION, ref totalMatches, ref totalCompares);
             });
 
-            Console.WriteLine(Environment.NewLine + "In C# StringSearchParallelFor: (1 THREAD)");
+            Console.WriteLine(Environment.NewLine + "In C# StringSearchParallelFor: (OPTIMIZED THREADS)");
             Console.WriteLine("Total Compares:{0}", totalCompares);
             Console.WriteLine("Total Matches: {0}", totalMatches);
 
