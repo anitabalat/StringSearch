@@ -91,31 +91,31 @@ namespace StringSearch
 
         int CharCmp(char a, char b, int c)
         {
-            int k, x;
-            x = random.Next(1000000);
+            //int k, x;
+            //x = random.Next(1000000);
 
-            for (k = 0; k < 1000 * a; k++)
-            {
-               if (x % 2 == 0)
-               {
-                  x = x + 2;
-               }
-               else
-               {
-                   x = x - 1;
-               }
-            }
-            for (k = 0; k < 1000 * b; k++)
-            {
-                 if (x % 2 == 0)
-                 {
-                    x = x + 2;
-                 }
-                 else
-                 {
-                    x = x - 1;
-                 }
-            }
+            //for (k = 0; k < 1000 * a; k++)
+            //{
+            //   if (x % 2 == 0)
+            //   {
+            //      x = x + 2;
+            //   }
+            //   else
+            //   {
+            //       x = x - 1;
+            //   }
+            //}
+            //for (k = 0; k < 1000 * b; k++)
+            //{
+            //     if (x % 2 == 0)
+            //     {
+            //        x = x + 2;
+            //     }
+            //     else
+            //     {
+            //        x = x - 1;
+            //     }
+            //}
 
             if (c == 1)                                         // perfect match
             {
