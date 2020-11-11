@@ -1,8 +1,7 @@
 ﻿using System;
-using System.IO;
 
 namespace StringSearch
-{   
+{
     public class StrSearch
     {
         public static void Main(string[] args)                                    // to display results in console window
