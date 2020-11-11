@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StringSearchSequentialTest
+namespace StringSearchTest
 {
     [TestClass]
     public class ThreadedTest

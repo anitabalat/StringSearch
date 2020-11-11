@@ -32,7 +32,7 @@ namespace StringSearch
                 StringSearch(line, searchString, lineNumber, SEARCH_OPTION, ref totalMatches, ref totalCompares);
             }
 
-            Console.WriteLine("In C# StringSearchSequential: (1 THREAD)");
+            Console.WriteLine(Environment.NewLine + "In C# StringSearchSequential: (1 THREAD)");
             Console.WriteLine("Total Compares:{0}", totalCompares);
             Console.WriteLine("Total Matches: {0}", totalMatches);
 

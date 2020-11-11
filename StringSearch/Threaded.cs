@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace StringSearch
 {
-    public class Threaded
+    class Threaded
     {
         private readonly object matchesLock = new object();
         private readonly object comparesLock = new object();
@@ -46,7 +46,7 @@ namespace StringSearch
                 threads[i].Join();
             }
 
-            Console.WriteLine("In C# StringSearchSequential: ({0} THREADS)", THREADS);
+            Console.WriteLine(Environment.NewLine + "In C# StringSearchThreaded: ({0} THREADS)", THREADS);
             Console.WriteLine("Total Compares:{0}", totalCompares);
             Console.WriteLine("Total Matches: {0}", totalMatches);
 

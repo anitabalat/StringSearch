@@ -1,10 +1,10 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StringSearch;
 
-namespace StringSearchSequentialTest
+namespace StringSearchTest
 {
     [TestClass]
-    public class StringSearchSequentialTest
+    public class SequentialTest
     {
         [TestMethod]
         public void Question1Test()
