@@ -45,21 +45,19 @@ namespace StringSearch
         void StringSearch(string line, string searchString, int lineNumber, int SEARCH_OPTION, ref int totalMatches, ref int totalCompares)
         {
             int i, j, k;
-            int match = 0;                                               // keeps track of match returned by charcmp
+            bool match = false;                                               // keeps track of match returned by charcmp
             int matchFound = 0;                                          // keeps track of whether a complete match has been found
             int startPoint = 0;                                          // holds starting point of where a match was found
-            int lineLength = line.Length;
-            int searchStringLength = searchString.Length;
 
-            for (i = 0; i < (lineLength - 1); i++)                        // for each element in the line array
+            for (i = 0; i < line.Length; i++)                        // for each element in the line array
             {
-                for (j = 0, k = i; j < searchStringLength; j++, k++)      // for each element in the search string
+                for (j = 0, k = i; j < searchString.Length; j++, k++)      // for each element in the search string
                 {                                                         // if there are as many elements left to check in the line array as there are elements in the search string...
-                    if ((i + (searchStringLength - 1)) < (lineLength - 1))
+                    if ((i + (searchString.Length - 1)) < line.Length)
                     {
                         match = CharCmp(line[k], searchString[j], SEARCH_OPTION);    // check for matching characters
 
-                        if (match == 1)
+                        if (match)
                         {
                             lock (matchesLock)
                             {
@@ -67,7 +65,7 @@ namespace StringSearch
                             }
                         }
 
-                        if (matchFound == searchStringLength)             // if the number of matched characters is the same as the number of chacters in the search string
+                        if (matchFound == searchString.Length)             // if the number of matched characters is the same as the number of chacters in the search string
                         {
                             startPoint = i;
                             totalMatches += 1;           // update the total number of matches found and print a message saying where the match was found
@@ -87,7 +85,7 @@ namespace StringSearch
             }
         }
 
-        int CharCmp(char a, char b, int c)
+        bool CharCmp(char a, char b, int c)
         {
             //int k, x;
             //x = random.Next(1000000);
@@ -119,11 +117,11 @@ namespace StringSearch
             {
                 if (a == b)
                 {
-                    return 1;
+                    return true;
                 }
                 else
                 {
-                    return 0;
+                    return false;
                 }
             }
 
@@ -134,11 +132,11 @@ namespace StringSearch
             {
                 if (a == b)
                 {
-                    return 1;
+                    return true;
                 }
                 else
                 {
-                    return 0;
+                    return false;
                 }
             }
 
@@ -146,19 +144,19 @@ namespace StringSearch
             {
                 if (a == b)
                 {
-                    return 1;
+                    return true;
                 }
                 else if ((a >= 48 && a <= 57) && (b >= 48 && b <= 57))  // if a or b are ascii digits
                 {
-                    return 1;
+                    return true;
                 }
                 else
                 {
-                    return 0;
+                    return false;
                 }
             }
 
-            return 0;
+            return false;
         }
     }
 }

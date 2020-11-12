@@ -2,7 +2,7 @@
   "profiles": {
     "StringSearch": {
       "commandName": "Project",
-      "commandLineArgs": "src pat2 1 3"
+      "commandLineArgs": "test search 1 1"
     }
   }
 }
