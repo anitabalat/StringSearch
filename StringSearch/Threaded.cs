@@ -16,8 +16,8 @@ namespace StringSearch
             int totalCompares = 0;
             int totalMatches = 0;
             int SEARCH_OPTION = Convert.ToInt16(args[2]);
+            int DELAY = Convert.ToInt16(args[4]);
             int THREADS = 2;
-            Random random = new Random();
             var fileToSearch = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + args[0];
             var searchPattern = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + args[1];
 
@@ -36,7 +36,7 @@ namespace StringSearch
             for (int i = 0; i < THREADS; i++)
             {
                 int id = i;
-                threads[i] = new Thread(() => StringSearch(lines, searchString, lineNumber, SEARCH_OPTION, ref totalMatches, ref totalCompares, THREADS, id));
+                threads[i] = new Thread(() => StringSearch(lines, searchString, lineNumber, SEARCH_OPTION, ref totalMatches, ref totalCompares, THREADS, id, DELAY));
                 threads[i].Start();
             }
 
@@ -52,7 +52,7 @@ namespace StringSearch
             return totalMatches;
         }
 
-        void StringSearch(string[] lines, string searchString, int lineNumber, int SEARCH_OPTION, ref int totalMatches, ref int totalCompares, int threads, int ID)
+        void StringSearch(string[] lines, string searchString, int lineNumber, int SEARCH_OPTION, ref int totalMatches, ref int totalCompares, int threads, int ID, int delay)
         {
             for (int line = ID; line < lines.Length; line += threads)
             {
@@ -69,7 +69,7 @@ namespace StringSearch
                     {                                                         // if there are as many elements left to check in the line array as there are elements in the search string...
                         if ((i + (searchString.Length - 1)) < oneLine.Length)
                         {
-                            match = CharCompare.CharCmp(oneLine[k], searchString[j], SEARCH_OPTION);    // check for matching characters
+                            match = CharCompare.CharCmp(oneLine[k], searchString[j], SEARCH_OPTION, delay);    // check for matching characters
 
                             if (match)
                             {

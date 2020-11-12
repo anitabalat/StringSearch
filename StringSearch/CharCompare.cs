@@ -6,33 +6,37 @@ namespace StringSearch
 {
     class CharCompare
     {
-        public static bool CharCmp(char a, char b, int c)
+        static Random random = new Random();
+        public static bool CharCmp(char a, char b, int c, int delayed)
         {
-            //int k, x;
-            //x = random.Next(1000000);
+            if (delayed == 1)
+            {
+                int k, x;
+                x = random.Next(1000000);
 
-            //for (k = 0; k < 1000 * a; k++)
-            //{
-            //   if (x % 2 == 0)
-            //  {
-            //      x = x + 2;
-            //  }
-            //   else
-            //   {
-            //       x = x - 1;
-            //  }
-            // }
-            //  for (k = 0; k < 1000 * b; k++)
-            //  {
-            //      if (x % 2 == 0)
-            //     {
-            //       x = x + 2;
-            //      }
-            //      else
-            //      {
-            //       x = x - 1;
-            //   }
-            //}
+                for (k = 0; k < 1000 * a; k++)
+                {
+                    if (x % 2 == 0)
+                    {
+                        x = x + 2;
+                    }
+                    else
+                    {
+                        x = x - 1;
+                    }
+                }
+                for (k = 0; k < 1000 * b; k++)
+                {
+                    if (x % 2 == 0)
+                    {
+                        x = x + 2;
+                    }
+                    else
+                    {
+                        x = x - 1;
+                    }
+                }
+            }
 
             if (c == 1)                                         // perfect match
             {
