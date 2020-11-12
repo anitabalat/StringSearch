@@ -82,7 +82,7 @@ namespace StringSearch
 
                                 lock (matchesLock)
                                 {
-                                    totalMatches += 1;                            // update the total number of matches found and print a message saying where the match was found
+                                    totalMatches++;                            // update the total number of matches found and print a message saying where the match was found
                                 }
 
                                 Console.WriteLine(Environment.NewLine + $"Match Found on Line: {lineNumber} Column: {startPoint}");
@@ -94,7 +94,7 @@ namespace StringSearch
 
                     lock (comparesLock)
                     {
-                        totalCompares += 1;                                     // update total number of compares
+                        totalCompares++;                                     // update total number of compares
                     }
                 }
             }

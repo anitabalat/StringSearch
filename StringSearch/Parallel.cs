@@ -69,7 +69,7 @@ namespace StringSearch
                         if (matchFound == searchString.Length)                // if the number of matched characters is the same as the number of chacters in the search string
                         {
                             startPoint = i;
-                            totalMatches += 1;                                // update the total number of matches found and print a message saying where the match was found
+                            totalMatches++;                                // update the total number of matches found and print a message saying where the match was found
 
                             Console.WriteLine(Environment.NewLine + $"Match Found on Line: {lineNumber} Column: {startPoint}");
                         }
@@ -80,7 +80,7 @@ namespace StringSearch
 
                 lock (comparesLock)
                 {
-                    totalCompares += 1;                                       // update total number of compares
+                    totalCompares++;                                       // update total number of compares
                 }
             }
         }
