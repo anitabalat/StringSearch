@@ -43,34 +43,34 @@ namespace StringSearch
         {
             int i, j, k;
             bool match = false;                                               // keeps track of match returned by charcmp
-            int matchFound = 0;                                          // keeps track of whether a complete match has been found
-            int startPoint = 0;                                          // holds starting point of where a match was found
+            int matchFound = 0;                                               // keeps track of whether a complete match has been found
+            int startPoint = 0;                                               // holds starting point of where a match was found
 
-            for (i = 0; i < line.Length; i++)                        // for each element in the line array
+            for (i = 0; i < line.Length; i++)                                 // for each element in the line array
             {
-                for (j = 0, k = i; j < searchString.Length; j++, k++)      // for each element in the search string
-                {                                                         // if there are as many elements left to check in the line array as there are elements in the search string...
+                for (j = 0, k = i; j < searchString.Length; j++, k++)         // for each element in the search string
+                {                                                             // if there are as many elements left to check in the line array as there are elements in the search string...
                     if ((i + (searchString.Length - 1)) < line.Length)
                     {
                         match = CharCompare.CharCmp(line[k], searchString[j], SEARCH_OPTION, delay);    // check for matching characters
 
                         if (match)
                         {
-                            matchFound++;                                // if characters matches, keep a tally of number of matched characters
+                            matchFound++;                                     // if characters matches, keep a tally of number of matched characters
                         }
 
-                        if (matchFound == searchString.Length)             // if the number of matched characters is the same as the number of chacters in the search string
+                        if (matchFound == searchString.Length)                // if the number of matched characters is the same as the number of chacters in the search string
                         {
                             startPoint = i;
-                            totalMatches += 1;           // update the total number of matches found and print a message saying where the match was found
+                            totalMatches += 1;                                // update the total number of matches found and print a message saying where the match was found
 
                             Console.WriteLine(Environment.NewLine + $"Match Found on Line: {lineNumber} Column: {startPoint}");
                         }
                     }
                 }
 
-                matchFound = 0;                                          // reinitialize matchFound to 0 for next iteration
-                totalCompares += 1;                     // update total number of compares
+                matchFound = 0;                                               // reinitialize matchFound to 0 for next iteration
+                totalCompares += 1;                                           // update total number of compares
             }
         }
     }

@@ -11,19 +11,19 @@ namespace StringSearch
             if (programChoice == 1)
             {
                 var sequentialSearch = new Sequential();
-                var totalSequentialMatches = sequentialSearch.GetTotalMatches(args);
+                sequentialSearch.GetTotalMatches(args);
             }
 
             if (programChoice == 2)
             {
                 var threadedSearch = new Threaded();
-                var totalThreadedMatches = threadedSearch.GetTotalMatches(args);
+                threadedSearch.GetTotalMatches(args);
             }
 
             if (programChoice == 3)
             {
                 var parallelSearch = new ParallelFor();
-                var parallelMatches = parallelSearch.GetTotalMatches(args);
+                parallelSearch.GetTotalMatches(args);
             }
         }
                                                                                  

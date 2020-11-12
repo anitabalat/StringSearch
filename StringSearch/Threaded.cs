@@ -17,7 +17,7 @@ namespace StringSearch
             int totalMatches = 0;
             int SEARCH_OPTION = Convert.ToInt16(args[2]);
             int DELAY = Convert.ToInt16(args[4]);
-            int THREADS = 2;
+            int THREADS = Convert.ToInt16(args[5]);
             var fileToSearch = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + args[0];
             var searchPattern = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + args[1];
 
@@ -60,41 +60,41 @@ namespace StringSearch
                 string oneLine = lines[line];
                 int i, j, k;
                 bool match = false;                                               // keeps track of match returned by charcmp
-                int matchFound = 0;                                          // keeps track of whether a complete match has been found
-                int startPoint = 0;                                          // holds starting point of where a match was found
+                int matchFound = 0;                                               // keeps track of whether a complete match has been found
+                int startPoint = 0;                                               // holds starting point of where a match was found
 
-                for (i = 0; i < oneLine.Length; i++)                        // for each element in the line array
+                for (i = 0; i < oneLine.Length; i++)                              // for each element in the line array
                 {
-                    for (j = 0, k = i; j < searchString.Length; j++, k++)      // for each element in the search string
-                    {                                                         // if there are as many elements left to check in the line array as there are elements in the search string...
+                    for (j = 0, k = i; j < searchString.Length; j++, k++)         // for each element in the search string
+                    {                                                             // if there are as many elements left to check in the line array as there are elements in the search string...
                         if ((i + (searchString.Length - 1)) < oneLine.Length)
                         {
                             match = CharCompare.CharCmp(oneLine[k], searchString[j], SEARCH_OPTION, delay);    // check for matching characters
 
                             if (match)
                             {
-                                matchFound++;                                // if characters matches, keep a tally of number of matched characters
+                                matchFound++;                                     // if characters matches, keep a tally of number of matched characters
                             }
 
-                            if (matchFound == searchString.Length)             // if the number of matched characters is the same as the number of chacters in the search string
+                            if (matchFound == searchString.Length)                // if the number of matched characters is the same as the number of chacters in the search string
                             {
                                 startPoint = i;
 
                                 lock (matchesLock)
                                 {
-                                    totalMatches += 1;           // update the total number of matches found and print a message saying where the match was found
+                                    totalMatches += 1;                            // update the total number of matches found and print a message saying where the match was found
                                 }
 
                                 Console.WriteLine(Environment.NewLine + $"Match Found on Line: {lineNumber} Column: {startPoint}");
                             }
                         }
                     }
-
-                    matchFound = 0;                                          // reinitialize matchFound to 0 for next iteration
+                      
+                    matchFound = 0;                                              // reinitialize matchFound to 0 for next iteration
 
                     lock (comparesLock)
                     {
-                        totalCompares += 1;                     // update total number of compares
+                        totalCompares += 1;                                     // update total number of compares
                     }
                 }
             }

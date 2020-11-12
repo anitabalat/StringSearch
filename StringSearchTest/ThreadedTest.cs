@@ -11,6 +11,7 @@ namespace StringSearchTest
     {
         string delay = "0";
         string programChoice = "2";
+        string threads = "6";
         [TestMethod]
         public void Question1Test()
         {
@@ -18,7 +19,7 @@ namespace StringSearchTest
             var search = "pat2";
             var SEARCH_OPTION = "1";
             var expectedMatches = 3;
-            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay };
+            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay, threads };
             var stringSearch = new StrSearch();
             var totalMatches = stringSearch.GetTotalThreadedSearchMatches(args);
 
@@ -32,7 +33,7 @@ namespace StringSearchTest
             var search = "pat2";
             var SEARCH_OPTION = "1";
             var expectedMatches = 6;
-            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay };
+            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay, threads };
             var stringSearch = new StrSearch();
             var totalMatches = stringSearch.GetTotalThreadedSearchMatches(args);
 
@@ -46,7 +47,7 @@ namespace StringSearchTest
             var search = "pat2";
             var SEARCH_OPTION = "1";
             var expectedMatches = 6;
-            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay };
+            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay, threads };
             var stringSearch = new StrSearch();
             var totalMatches = stringSearch.GetTotalThreadedSearchMatches(args);
 
@@ -60,7 +61,7 @@ namespace StringSearchTest
             var search = "pat1";
             var SEARCH_OPTION = "1";
             var expectedMatches = 271;
-            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay };
+            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay, threads };
             var stringSearch = new StrSearch();
             var totalMatches = stringSearch.GetTotalThreadedSearchMatches(args);
 
@@ -74,7 +75,7 @@ namespace StringSearchTest
             var search = "pat3";
             var SEARCH_OPTION = "2";
             var expectedMatches = 271;
-            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay };
+            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay, threads };
             var stringSearch = new StrSearch();
             var totalMatches = stringSearch.GetTotalThreadedSearchMatches(args);
 
@@ -88,7 +89,7 @@ namespace StringSearchTest
             var search = "pat4";
             var SEARCH_OPTION = "2";
             var expectedMatches = 127;
-            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay };
+            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay, threads };
             var stringSearch = new StrSearch();
             var totalMatches = stringSearch.GetTotalThreadedSearchMatches(args);
 
@@ -102,7 +103,7 @@ namespace StringSearchTest
             var search = "pat5";
             var SEARCH_OPTION = "2";
             var expectedMatches = 217;
-            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay };
+            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay, threads };
             var stringSearch = new StrSearch();
             var totalMatches = stringSearch.GetTotalThreadedSearchMatches(args);
 
@@ -116,7 +117,7 @@ namespace StringSearchTest
             var search = "pat6";
             var SEARCH_OPTION = "3";
             var expectedMatches = 11;
-            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay };
+            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay, threads };
             var stringSearch = new StrSearch();
             var totalMatches = stringSearch.GetTotalThreadedSearchMatches(args);
 
@@ -130,7 +131,7 @@ namespace StringSearchTest
             var search = "pat7";
             var SEARCH_OPTION = "3";
             var expectedMatches = 27;
-            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay };
+            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay, threads };
             var stringSearch = new StrSearch();
             var totalMatches = stringSearch.GetTotalThreadedSearchMatches(args);
 
@@ -144,7 +145,7 @@ namespace StringSearchTest
             var search = "pat8";
             var SEARCH_OPTION = "3";
             var expectedMatches = 2;
-            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay };
+            string[] args = { lines, search, SEARCH_OPTION, programChoice, delay, threads };
             var stringSearch = new StrSearch();
             var totalMatches = stringSearch.GetTotalThreadedSearchMatches(args);
 
