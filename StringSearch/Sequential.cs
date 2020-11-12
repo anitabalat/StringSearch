@@ -33,7 +33,7 @@ namespace StringSearch
             }
 
             Console.WriteLine(Environment.NewLine + "In C# StringSearchSequential: (1 THREAD)");
-            Console.WriteLine("Total Compares:{0}", totalCompares);
+            Console.WriteLine("Total Compares: {0}", totalCompares);
             Console.WriteLine("Total Matches: {0}", totalMatches);
 
             return totalMatches;
@@ -52,7 +52,7 @@ namespace StringSearch
                 {                                                         // if there are as many elements left to check in the line array as there are elements in the search string...
                     if ((i + (searchString.Length - 1)) < line.Length)
                     {
-                        match = CharCmp(line[k], searchString[j], SEARCH_OPTION);    // check for matching characters
+                        match = CharCompare.CharCmp(line[k], searchString[j], SEARCH_OPTION);    // check for matching characters
 
                         if (match)
                         {
@@ -72,80 +72,6 @@ namespace StringSearch
                 matchFound = 0;                                          // reinitialize matchFound to 0 for next iteration
                 totalCompares += 1;                     // update total number of compares
             }
-        }
-
-        bool CharCmp(char a, char b, int c)
-        {
-            //int k, x;
-            //x = random.Next(1000000);
-
-            //for (k = 0; k < 1000 * a; k++)
-            //{
-            //   if (x % 2 == 0)
-            //  {
-            //      x = x + 2;
-            //  }
-            //   else
-            //   {
-            //       x = x - 1;
-            //  }
-            // }
-            //  for (k = 0; k < 1000 * b; k++)
-            //  {
-            //      if (x % 2 == 0)
-            //     {
-            //       x = x + 2;
-            //      }
-            //      else
-            //      {
-            //       x = x - 1;
-            //   }
-            //   }
-
-            if (c == 1)                                         // perfect match
-            {
-                if (a == b)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            a = char.ToUpper(a);                                   // convert a and b to the same case for case insensitive matches
-            b = char.ToUpper(b);
-
-            if (c == 2)                                        // perfect match and different case match
-            {
-                if (a == b)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            if (c == 3)                                                  // perfect, different case, and different digit match
-            {
-                if (a == b)
-                {
-                    return true;
-                }
-                else if ((a >= 48 && a <= 57) && (b >= 48 && b <= 57))  // if a or b are ascii digits
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            return false;
         }
     }
 }
