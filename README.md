@@ -1,7 +1,7 @@
 # StringSearch
 
 ## Prerequisites
-[.NET Core 2.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.1)
+[.NET Core 2.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.1) or greater.
 
 ## Instructions 
 Open PowerShell or Windows Command and run the following commands.
@@ -27,7 +27,7 @@ Refer to [dotnet publish documentation](https://docs.microsoft.com/en-us/dotnet/
 #### Example: 
 `dotnet C:\Users\anita\Desktop\StringSearch\StringSearch.dll src pat2 1 1 1 1`
  
-### To run tests: 
+### To run unit tests: 
 `dotnet vstest [DLL Path]`
 
 #### Example: 
